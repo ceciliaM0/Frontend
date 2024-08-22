@@ -1,9 +1,109 @@
-console.log(participatingCountries());
+console.log(participatingCountries()); //1
+console.log(PopulousCountries()); //2
+console.log(countriesStartingWithA()); //3
+console.log(totalPopulation()); //4
+console.log(earliestCountries()); //5
+console.log(nationCodeArray()); //6
+console.log(mostAppearances()); //7
+console.log(mostSuccessfulAthletics()); //8
+console.log(smallCountry()); //8
+console.log(getCoutriesPopulation()); //9
+console.log(getCountrieGroupesByFirstLetter()); //10
 
+//1
 function participatingCountries() {
   const arr = getOlympicData();
   return arr.map(item => item.Nation);
 }
+
+//2
+function PopulousCountries() {
+  const arr = getOlympicData();
+  return arr.sort((a, b) => b.Population - a.Population)
+            .slice(0, 5)
+            .map(item => item.Nation);
+}
+
+//3
+function countriesStartingWithA() {
+  const arr = getOlympicData();
+  return arr.filter(item => item.Exists === "YES" && item.Nation.startsWith("A"))
+            .map(item => item.Nation);
+}
+
+//4
+function totalPopulation() {
+  const arr = getOlympicData();
+  return arr.reduce((sum, item) => sum + item.Population, 0);
+}
+
+//5
+function earliestCountries(){
+  const arr = getOlympicData();
+  return arr.sort((a,b) => b.First_App - a.First_App)
+            .slice(0,5)
+            .map(item => item.Nation);
+}
+
+//6
+function nationCodeArray() {
+  const arr = getOlympicData();
+  return arr.map(item => ({
+    nation: item.Nation,
+    code: item.Code
+  }));
+}
+
+//7
+function mostAppearances() {
+  const arr = getOlympicData();
+  let maxAppearancesCountry = arr.reduce((max, item) => 
+    item.Apps > max.Apps ? item : max
+  );
+
+  return maxAppearancesCountry.Nation;
+}
+
+//8
+function mostSuccessfulAthletics() {
+  const arr = getOlympicData();
+  return arr.filter(item => item.MostSuccessfulSport === "Athletics")
+            .map(item => item.Nation);
+}
+
+//8
+function smallCountry(){
+  const arr = getOlympicData();
+  return arr.filter(item => item.Medals > 0)
+             .reduce((min,item)=>(item.Population<min.Population ? item : min), arr[0]);            
+}
+
+//9
+function getCoutriesPopulation(){
+  const arr = getOlympicData();
+  const populationObject = arr.reduce((acc,item)=>{
+    acc[item.Nation] = item.Population;
+    return acc;
+  }, {});
+  return populationObject;
+}
+
+//10
+function getCountrieGroupesByFirstLetter(){
+  const arr = getOlympicData();
+  const groupedCountries = arr.reduce((acc, item) =>{
+    const firstLetter =item.Nation.charAt(0).toUpperCase();
+
+    if(!acc[firstLetter]){
+      acc[firstLetter] = [];
+    }
+    acc[firstLetter].push(item.Nation);
+    return acc;
+  },{});
+  return groupedCountries;
+}
+
+//11
 
 function getOlympicData() { 
   return [
