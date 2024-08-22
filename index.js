@@ -9,6 +9,11 @@ console.log(mostSuccessfulAthletics()); //8
 console.log(smallCountry()); //8
 console.log(getCoutriesPopulation()); //9
 console.log(getCountrieGroupesByFirstLetter()); //10
+console.log(randomCountry()); //11
+console.log(moreMedalsThanSummer()); //12
+console.log(medianMedals()); //13
+console.log(mostRecentCountry()); //14
+console.log(oldestFirstApp()); //15
 
 //1
 function participatingCountries() {
@@ -104,6 +109,75 @@ function getCountrieGroupesByFirstLetter(){
 }
 
 //11
+function randomCountry(){
+  const arr = getOlympicData();
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  const randomCountry = arr[randomIndex];
+  return{
+    nation: randomCountry.Nation,
+    population: randomCountry.Population
+  };
+}
+
+//12
+function moreMedalsThanSummer(){
+  const arr = getOlympicData();
+  const result = arr.filter(item => 
+    item.Population > 1000000 &&
+    item.SO_Medal > item.WO_Medal
+  ).map(item => ({
+    nation: item.Nation,
+    winterMedals: item.SO_Medal,
+    summerMedals: item.WO_Medal
+  }));
+  
+  return result;
+}
+
+//13
+function medianMedals(){
+  const arr = getOlympicData();
+  const totalMedals = arr.reduce((sum, item) => sum + item.Medals, 0);
+  const averageMedals = totalMedals / arr.length;
+  const result = arr.filter(item => 
+    item.Population < 5000000 &&
+    item.Medals > (0.5 * averageMedals)
+  ).map(item => ({
+    nation: item.Nation,
+    medals: item.Medals
+  }));
+  return result;
+}
+
+//14
+function mostRecentCountry(){
+  const arr = getOlympicData();
+  const mostRecentCountry = arr.reduce((latest, item) => {
+    if (item.First_App > latest.First_App) {
+      return item;
+    }
+    return latest;
+  }, arr[0]);
+  return {
+    nation: mostRecentCountry.Nation,
+    firstAppearance: mostRecentCountry.First_App
+  };
+}
+
+//15
+function oldestFirstApp(){
+  const arr = getOlympicData();
+  const existingCountries = arr.filter(item => item.Exists === "YES");
+  const oldestFirstApp = Math.min(...existingCountries.map(item => item.First_App));
+  const result = existingCountries.filter(item => item.First_App === oldestFirstApp)
+    .map(item => ({
+      nation: item.Nation,
+      firstAppearance: item.First_App
+    }));
+
+  return result;
+
+}
 
 function getOlympicData() { 
   return [
