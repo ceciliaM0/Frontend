@@ -4,7 +4,7 @@ html, body {
 }
 
 .background-image {
-    background-image: url('ntt-data-1-dthj.jpg');
+    background-image: url('floor_bg_1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -18,7 +18,7 @@ html, body {
     right: 0;
     width: 10%;
     height: 100%;
-    background-color: rgba(128, 128, 128, 0.5);
+    background-color: rgba(58, 58, 58, 0.8);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -28,12 +28,12 @@ html, body {
 }
 
 .button {
-    width: 80%;
-    padding: 10px 0;
+    width: 55%;
+    padding: 10px;
     font-size: 16px;
-    background-color: rgb(105,105,105);
+    background-color: transparent;
     color: white;
-    border: none;
+    border: 2px solid gray;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -41,4 +41,69 @@ html, body {
 
 .button:hover {
     background-color: #000000;
+}
+
+.logo-container{
+    position:absolute;
+    top: 30px;
+    left: 50px;
+}
+
+.logo{
+    width:80%;
+    height: auto;
+}
+
+.back{
+    width:30%;
+    height:40%;
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:15px;
+}
+
+.back:hover{
+    background-color: #000000;
+}
+
+.exit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    width: 30px;
+    height: 5px;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.meniu{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px;
+    width: 30px;
+    height: 5px;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    padding:5px;
+}
+
+.love{
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    margin: 20px;
 }
