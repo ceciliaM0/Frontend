@@ -8,8 +8,8 @@ var showMessage = function(e) {
     
     var buttonRect = e.target.getBoundingClientRect();
     
-    messageDiv.style.top = buttonRect.top + "px"; // Poziționează vertical în funcție de buton
-    messageDiv.style.left = (buttonRect.left - messageDiv.offsetWidth - 10) + "px"; // Poziționează în stânga butonului, cu un offset de 10px
+    messageDiv.style.top = buttonRect.top + "px";
+    messageDiv.style.left = (buttonRect.left - messageDiv.offsetWidth - 10) + "px";
 
     setTimeout(function() {
         messageDiv.style.display = "none";

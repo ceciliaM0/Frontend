@@ -109,14 +109,14 @@ html, body {
 }
 
 #message {
-    position: absolute; /* Poziționare absolută pentru a controla locația exactă */
+    position: absolute;
     color: white; 
     text-align: left; 
     background-color: rgba(0, 0, 0, 0.7);
     padding: 5px;
     border-radius: 4px;
     display: none; 
-    white-space: nowrap; /* Previne înfășurarea textului */
+    white-space: nowrap;
 }
 
 
