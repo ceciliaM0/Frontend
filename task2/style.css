@@ -43,20 +43,20 @@ html, body {
     background-color: #000000;
 }
 
-.logo-container{
-    position:absolute;
+.logo-container {
+    position: absolute;
     top: 30px;
     left: 50px;
 }
 
-.logo{
-    width:80%;
+.logo {
+    width: 80%;
     height: auto;
 }
 
-.back{
-    width:30%;
-    height:40%;
+.back {
+    width: 30%;
+    height: 40%;
     background-color: transparent;
     color: white;
     border: 2px solid white;
@@ -68,42 +68,55 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top:15px;
+    margin-top: 15px;
 }
 
-.back:hover{
+.back:hover {
     background-color: #000000;
 }
 
-.exit{
+.exit {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px;
     width: 30px;
     height: 5px;
-    border:none;
+    border: none;
     background-color: transparent;
     cursor: pointer;
     padding: 5px;
 }
 
-.meniu{
-    display:flex;
+.meniu {
+    display: flex;
     justify-content: center;
     align-items: center;
     margin: 30px;
     width: 30px;
     height: 5px;
-    border:none;
+    border: none;
     background-color: transparent;
     cursor: pointer;
-    padding:5px;
+    padding: 5px;
 }
 
-.love{
+.love {
     background-color: transparent;
     border: 2px solid white;
     color: white;
     margin: 20px;
 }
+
+#message {
+    position: absolute; /* Poziționare absolută pentru a controla locația exactă */
+    color: white; 
+    text-align: left; 
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    border-radius: 4px;
+    display: none; 
+    white-space: nowrap; /* Previne înfășurarea textului */
+}
+
+
