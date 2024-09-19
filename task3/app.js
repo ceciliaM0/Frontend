@@ -1,18 +1,28 @@
-window.load=take_photos();
-var photos;
-async function take_photos()
-{
-    const response= await fetch("https://picsum.photos/v2/list");
-    photos= await response.json();
-    console.log(photos);
-    show_photos(photos);
+window.onload = take_photos();
+
+let photos;
+let filteredPhotos = [];
+let currentPage = 1;
+const photosPerPage = 6;
+
+async function take_photos() {
+    const response = await fetch("https://picsum.photos/v2/list");
+    photos = await response.json();
+    console.log('Photos loaded:', photos);
+    filteredPhotos = [...photos];
+    show_photos(filteredPhotos);
     fill_select(photos);
 }
 
 function show_photos(photos) {
     const parent = document.getElementsByClassName('photos-area')[0];
     parent.innerHTML = '';
-    photos.forEach(entry => {
+
+    const start = (currentPage - 1) * photosPerPage;
+    const end = start + photosPerPage;
+    const photosToShow = photos.slice(start, end);
+
+    photosToShow.forEach(entry => {
         const frame = document.createElement('div');
         frame.className = 'photo-frame';
 
@@ -56,15 +66,38 @@ function show_photos(photos) {
         frame.appendChild(flipCardInner);
         parent.appendChild(frame);
     });
+
+    updateControls();
 }
 
+function updateControls() {
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = (currentPage * photosPerPage) >= filteredPhotos.length;
+}
+
+function showNextPage() {
+    if ((currentPage * photosPerPage) < filteredPhotos.length) {
+        currentPage++;
+        show_photos(filteredPhotos);
+    }
+}
+
+function showPrevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        show_photos(filteredPhotos);
+    }
+}
 
 function fill_select(data) {
     authors = new Set();
     data.forEach(item => {
         authors.add(item['author']);
     });
-    
+
     var dropdown = document.getElementById("myDropdown");
 
     authors.forEach(author => {
@@ -88,46 +121,47 @@ function fill_select(data) {
     dropdown.appendChild(allOption);
 }
 
-function handleAuthorSelect(event)
-{
-    const selectedAuthor = event.target.value; 
-    if(selectedAuthor!='all')
-    photosByAuthor=photos.filter(item=>{ return item['author']==selectedAuthor });
-    else
-        photosByAuthor=photos;
-    show_photos(photosByAuthor);
+function handleAuthorSelect(event) {
+    const selectedAuthor = event.target.value;
+    if (selectedAuthor !== 'all') {
+        filteredPhotos = photos.filter(item => item['author'] === selectedAuthor);
+    } else {
+        filteredPhotos = [...photos];
+    }
+    currentPage = 1;
+    show_photos(filteredPhotos);
 }
 
-function show_full_photo(link)
-{
-    elem=document.getElementsByClassName('entire_photo')[0];
+function show_full_photo(link) {
+    elem = document.getElementsByClassName('entire_photo')[0];
     elem.innerHTML = '<button class="close-btn" onclick="close_photo()">X</button>';
-    elem.style.display='block';
-    full_size=document.createElement('img');
-    full_size.className='full-photo';
-    full_size.src=link;
+    elem.style.display = 'block';
+    full_size = document.createElement('img');
+    full_size.className = 'full-photo';
+    full_size.src = link;
     elem.appendChild(full_size);
 }
 
-function close_photo()
-{
-    document.getElementsByClassName('entire_photo')[0].style.display = 'none';
-}
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
-  }
-  
-  function filterFunction() {
+}
+
+function filterFunction() {
     const input = document.getElementById("myInput");
     const filter = input.value.toUpperCase();
     const div = document.getElementById("myDropdown");
     const a = div.getElementsByTagName("a");
     for (let i = 0; i < a.length; i++) {
-      txtValue = a[i].textContent || a[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        a[i].style.display = "";
-      } else {
-        a[i].style.display = "none";
-      }
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
     }
-  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('nextBtn').addEventListener('click', showNextPage);
+    document.getElementById('prevBtn').addEventListener('click', showPrevPage);
+});
