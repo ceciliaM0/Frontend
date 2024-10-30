@@ -1,0 +1,17 @@
+.photos-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5vw;
+    row-gap: 5vh;
+    justify-content: center;
+    height: 90vh;
+    margin-top: 8vh;
+}
+
+@media screen and (max-width: 750px) {
+    .photos-area {
+        gap: 0;
+        row-gap: 1%;
+    }
+}

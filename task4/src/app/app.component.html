@@ -1,0 +1,14 @@
+@if (isFetching()===true)
+{
+    @if (error())
+    {
+        <p>Something went wrong</p>
+    }
+}
+
+@if (photos())
+{
+    <app-dropbutton [authors]="authors" (author)="photosByAuthor($event)"></app-dropbutton>
+    <app-photos-area [photos]="photos()" />
+    <app-controls (prev)="handlePrev()" (next)="handleNext()"></app-controls>
+}

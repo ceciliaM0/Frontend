@@ -1,0 +1,17 @@
+<div class="photo-frame">
+    <div class="flip-card-inner">
+        <div class="flip-card-front">
+            <div class="photo-preview">
+                <img [src]="photo.download_url" alt="Photo Preview">
+            </div>
+            <p class="title">{{ photo.author }}</p>
+        </div>
+        
+        <div class="flip-card-back">
+            <p class="description">
+                This photo has {{ photo.height }} px height and {{ photo.width }} px width. 
+                You can download it from: {{ photo.download_url }}
+            </p>
+        </div>
+    </div>
+</div>
