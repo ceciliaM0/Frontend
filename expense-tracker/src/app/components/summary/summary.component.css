@@ -1,0 +1,15 @@
+/* summary.component.css */
+.summary {
+    margin-top: 20px;
+    text-align: left;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
