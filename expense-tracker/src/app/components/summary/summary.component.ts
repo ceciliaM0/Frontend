@@ -9,5 +9,5 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class SummaryComponent {
-  @Input() weeklyExpenses: any[] = []; // Toate cheltuielile săptămânale
+  @Input() weeklyExpenses: any[] = [];
 }

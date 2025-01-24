@@ -11,8 +11,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class ExpenseListComponent {
   @Input() currentDay: string = '';
-  @Input() dailyExpenses: any[] = []; // Cheltuieli din ziua curentă
-  @Output() expenseDeleted = new EventEmitter<any>(); // Emite evenimentul la ștergere
+  @Input() dailyExpenses: any[] = [];
+  @Output() expenseDeleted = new EventEmitter<any>();
 
   newExpense = {
     category: '',
@@ -24,25 +24,23 @@ export class ExpenseListComponent {
   addExpense() {
     if (this.newExpense.category && this.newExpense.amount > 0) {
       if (this.editingIndex !== null) {
-        // Actualizează cheltuiala existentă
         this.dailyExpenses[this.editingIndex] = { ...this.newExpense };
-        this.editingIndex = null; // Resetează indexul după editare
+        this.editingIndex = null;
       } else {
-        // Adaugă o cheltuială nouă
         this.dailyExpenses.push({ ...this.newExpense });
       }
-      this.newExpense = { category: '', amount: 0 }; // Resetează formularul
+      this.newExpense = { category: '', amount: 0 };
     }
   }
 
   editExpense(expense: any) {
-    this.editingIndex = this.dailyExpenses.indexOf(expense); // Obține indexul cheltuielii
-    this.newExpense = { ...expense }; // Setează datele în formular
+    this.editingIndex = this.dailyExpenses.indexOf(expense);
+    this.newExpense = { ...expense };
   }
 
   deleteExpense(expense: any) {
-    this.dailyExpenses = this.dailyExpenses.filter(e => e !== expense); // Șterge cheltuiala
-    this.expenseDeleted.emit(expense); // Notifică părintele
+    this.dailyExpenses = this.dailyExpenses.filter(e => e !== expense);
+    this.expenseDeleted.emit(expense);
   }
 
   calculateTotal(): number {

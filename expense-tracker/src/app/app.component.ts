@@ -33,7 +33,9 @@ export class AppComponent {
   pieChart: any;
 
   ngAfterViewChecked() {
-    if (this.viewSummary && !this.pieChart) {
+    const ctx = document.getElementById('expensePieChart') as HTMLCanvasElement;
+    if (this.viewSummary && !this.pieChart && ctx) {
+      console.log('Rendering pie chart...');
       this.renderPieChart();
     }
   }
@@ -83,10 +85,13 @@ export class AppComponent {
   }
 
   get weeklySummary() {
-    return Object.entries(this.expensesByDay).flatMap(([day, expenses]) =>
+    const summary = Object.entries(this.expensesByDay).flatMap(([day, expenses]) =>
       expenses.map(expense => ({ day, ...expense }))
     );
+    console.log('Weekly Summary:', summary);
+    return summary;
   }
+  
 
   get nextDayLabel(): string {
     const currentIndex = this.days.indexOf(this.currentDay);
@@ -125,7 +130,9 @@ export class AppComponent {
 
   toggleSummary() {
     this.viewSummary = !this.viewSummary;
+    console.log('View Summary:', this.viewSummary);
   }
+  
 
   changeDay(day: string) {
     this.currentDay = day;
@@ -161,12 +168,10 @@ export class AppComponent {
   }
 
   exportToExcel() {
-    // Create an empty array to store formatted data
     const data: { Day: string; Category: string; Amount: number }[] = [];
   
-    // Iterate over each day and its expenses
     for (const day of this.days) {
-      const dayExpenses = this.expensesByDay[day] || []; // Ensure it handles undefined gracefully
+      const dayExpenses = this.expensesByDay[day] || [];
       dayExpenses.forEach((expense) => {
         data.push({
           Day: day,
@@ -176,12 +181,10 @@ export class AppComponent {
       });
     }
   
-    // Create a worksheet from the data array
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Weekly Expenses');
   
-    // Trigger Excel file download
     XLSX.writeFile(workbook, 'Weekly_Expenses.xlsx');
   }
   
