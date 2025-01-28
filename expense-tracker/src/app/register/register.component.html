@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="form-container">
+    <h2>Register</h2>
+    <form (ngSubmit)="register()">
+      <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required />
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Parolă" required />
+      <button type="submit">Register</button>
+    </form>
+
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+    
+    <p>Ai deja cont? <button (click)="navigateToLogin()" class="btn-login">Autentifică-te</button></p>
+  </div>
+</div>

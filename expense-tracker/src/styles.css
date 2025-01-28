@@ -86,18 +86,6 @@ h1, h2 {
   background-color: #f9f9f9;
 }
 
-.expense-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.expense-item:last-child {
-  border-bottom: none;
-}
-
 .expense-details {
   flex-grow: 1;
 }
@@ -106,29 +94,6 @@ h1, h2 {
   display: flex;
   gap: 10px;
 }
-
-.daily-total {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-  background-color: #f0f0f0;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-}
-
-.total-label {
-  font-size: 16px;
-  color: #333;
-}
-
-.total-value {
-  font-size: 16px;
-  color: #000;
-}
-
 
 .summary {
   margin-top: 20px;
